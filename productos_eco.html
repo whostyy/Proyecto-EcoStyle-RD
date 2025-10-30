@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Productos Eco - Ecostyle RD</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+
+<style>
+:root {
+    --color-bg: #F5F0E6;
+    --color-primary: #3A5D21;
+    --color-secondary: #6B952C;
+    --color-accent: #000000;
+    --color-text: #444444;
+    --color-light-text: #FFFFFF;
+}
+
+* { box-sizing: border-box; margin:0; padding:0; }
+
+body {
+    font-family: 'Roboto', sans-serif;
+    background-color: var(--color-bg);
+    color: var(--color-text);
+    line-height: 1.6;
+}
+
+h1,h2,h3 { font-family: 'Playfair Display', serif; color: var(--color-primary); margin-bottom:0.5em; text-align:center; }
+
+a { text-decoration:none; color:var(--color-primary);}
+a:hover { color: var(--color-secondary); }
+
+.main-header {
+    background-color: var(--color-bg);
+    height: 70px;
+    padding: 0 5%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid rgba(0,0,0,0.1);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+.site-logo { height: 250px; width: auto; }
+
+.nav-links { list-style:none; display:flex; gap:25px; }
+.nav-links li { list-style:none; }
+.nav-links a.btn-contact { color: var(--color-light-text); background-color: var(--color-primary); padding:8px 15px; border-radius:5px;}
+.nav-links a.btn-contact:hover { background-color: var(--color-secondary);}
+
+.product-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 30px;
+    max-width:1200px;
+    margin:40px auto;
+}
+
+.product-item {
+    background:#fff;
+    padding:20px;
+    border-radius:10px;
+    box-shadow:0 4px 10px rgba(0,0,0,0.1);
+    transition: all 0.3s ease;
+    text-align:center;
+}
+
+.product-item:hover { transform:translateY(-5px); box-shadow:0 10px 20px rgba(0,0,0,0.15); }
+
+.product-item img { width:100%; height:200px; object-fit:cover; border-radius:10px; margin-bottom:15px; }
+
+.product-item h3 { font-size:1.2rem; margin-bottom:10px; }
+
+.product-item p { font-size:0.95rem; margin-bottom:10px; color:#555; }
+
+.product-item .price { font-weight:700; color: var(--color-primary); margin-bottom:10px; }
+
+.product-item button {
+    background-color: var(--color-secondary);
+    color:#fff;
+    border:none;
+    padding:10px 20px;
+    border-radius:5px;
+    cursor:pointer;
+    font-weight:700;
+    transition: all 0.3s;
+}
+.product-item button:hover { background-color: var(--color-primary); }
+
+footer { background-color: var(--color-primary); color: var(--color-bg); padding:40px 5%; font-size:0.9rem; text-align:center; margin-top:40px; }
+
+.nav-links a.active {
+    font-weight: 700;
+    color: var(--color-secondary);
+    pointer-events: none; /* opcional, para que no se pueda volver a hacer clic */
+}
+
+/* Ocultar el enlace de Productos Eco cuando estás en la página productos_eco.html */
+.nav-links a[href="productos_eco.html"] {
+    display: none;
+}
+
+
+</style>
+
+
+</head>
+<body>
+
+<header class="main-header">
+    <div class="logo-container">
+        <a href="ecostylerd.html"><img src="Logo_2-removebg-preview.png" alt="Logo Ecostyle RD" class="site-logo"></a>
+    </div>
+    <nav>
+        <ul class="nav-links">
+    <li><a href="ecostylerd.html">Inicio</a></li>
+    <li><a href="productos_eco.html" class="active">Productos Eco</a></li> <!-- aquí -->
+    <li><a href="index.html#servicios">Servicios</a></li>
+    
+    <li><a href="carrito.html" class="cart-icon" title="Ver carrito">🛒</a></li>
+</ul>
+
+    </nav>
+</header>
+
+<section id="productos">
+    <h1>Productos ECO Especiales</h1>
+    <div class="product-grid">
+        
+        <!-- Producto 1 -->
+        <div class="product-item">
+            <img src="productos/eco1.jpg" alt="Eco Producto 1">
+            <h3>Eco Producto 1</h3>
+            <p>Descripción breve del producto especial ECO 1.</p>
+            <div class="price">$15.99</div>
+            <button>Comprar</button>
+        </div>
+
+        <!-- Producto 2 -->
+        <div class="product-item">
+            <img src="productos/eco2.jpg" alt="Eco Producto 2">
+            <h3>Eco Producto 2</h3>
+            <p>Descripción breve del producto especial ECO 2.</p>
+            <div class="price">$22.50</div>
+            <button>Comprar</button>
+        </div>
+
+        <!-- Producto 3 -->
+        <div class="product-item">
+            <img src="productos/eco3.jpg" alt="Eco Producto 3">
+            <h3>Eco Producto 3</h3>
+            <p>Descripción breve del producto especial ECO 3.</p>
+            <div class="price">$18.75</div>
+            <button>Comprar</button>
+        </div>
+
+        <!-- Producto 4 -->
+        <div class="product-item">
+            <img src="productos/eco4.jpg" alt="Eco Producto 4">
+            <h3>Eco Producto 4</h3>
+            <p>Descripción breve del producto especial ECO 4.</p>
+            <div class="price">$12.99</div>
+            <button>Comprar</button>
+        </div>
+
+        <!-- Puedes agregar más productos aquí siguiendo el mismo formato -->
+
+    </div>
+</section>
+
+<footer>
+    <p>&copy; 2025 Ecostyle RD. Todos los derechos reservados.</p>
+</footer>
+
+</body>
+</html>
