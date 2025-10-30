@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>Carrito</title>
+<style>
+  body {
+    font-family: Arial;
+    padding: 20px;
+  }
+
+  .cart-item {
+    display: flex;
+    gap: 15px;
+    margin-bottom: 15px;
+    padding: 10px;
+    border-bottom: 1px solid #ccc;
+    align-items: center;
+  }
+
+  .cart-item img {
+    width: 60px;
+    height: 60px;
+    object-fit: cover;
+    border-radius: 8px;
+  }
+
+  button {
+    background: green;
+    color: #fff;
+    border: none;
+    padding: 8px 14px;
+    cursor: pointer;
+    border-radius: 6px;
+  }
+
+  button:hover {
+    opacity: .8;
+  }
+</style>
+</head>
+<body>
+
+<h1>🛒 Tu Carrito</h1>
+<div id="cart-items"></div>
+
+<h3>Total: <span id="total">0</span> RD$</h3>
+
+<button onclick="vaciarCarrito()">Vaciar Carrito</button>
+<a href="catalogo.html"><button>Seguir comprando</button></a>
+
+<script>
+  let cart = JSON.parse(localStorage.getItem("cart")) || [];
+
+  function mostrarCarrito() {
+    const contenedor = document.getElementById("cart-items");
+    let total = 0;
+    contenedor.innerHTML = "";
+
+    if (cart.length === 0) {
+      contenedor.innerHTML = "<p>Tu carrito está vacío 🛍️</p>";
+      document.getElementById("total").innerText = 0;
+      return;
+    }
+
+    cart.forEach((p, index) => {
+      total += Number(p.price);
+      contenedor.innerHTML += `
+        <div class="cart-item">
+          <img src="${p.img}">
+          <div>
+            <strong>${p.name}</strong><br>
+            RD$${p.price}
+          </div>
+          <button onclick="eliminar(${index})">Eliminar</button>
+        </div>
+      `;
+    });
+
+    document.getElementById("total").innerText = total;
+  }
+
+  function eliminar(i) {
+    cart.splice(i,1);
+    localStorage.setItem("cart", JSON.stringify(cart));
+    mostrarCarrito();
+  }
+
+  function vaciarCarrito() {
+    localStorage.removeItem("cart");
+    cart = [];
+    mostrarCarrito();
+  }
+
+  mostrarCarrito();
+</script>
+
+</body>
+</html>

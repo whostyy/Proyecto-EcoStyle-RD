@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ecostyle RD - Sustainable Living</title>
+
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+
+<style>
+/* --- CSS INTEGRADO --- */
+:root {
+    --color-bg: #F5F0E6;
+    --color-primary: #3A5D21;
+    --color-secondary: #6B952C;
+    --color-accent: #000000;
+    --color-text: #444444;
+    --color-light-text: #FFFFFF;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+    font-family: 'Roboto', sans-serif;
+    background-color: var(--color-bg);
+    color: var(--color-text);
+    line-height: 1.6;
+}
+
+h1,h2,h3 { font-family: 'Playfair Display', serif; color: var(--color-primary); margin-bottom:0.5em; }
+a { text-decoration:none; color:var(--color-primary);}
+a:hover { color: var(--color-secondary); }
+
+.btn {
+    display:inline-block;
+    padding:10px 25px;
+    border-radius:5px;
+    font-weight:700;
+    transition: all 0.3s;
+    text-transform:uppercase;
+}
+.btn-primary {
+    background-color: var(--color-primary);
+    color: var(--color-light-text);
+    border: 2px solid var(--color-primary);
+}
+.btn-primary:hover {
+    background-color: var(--color-secondary);
+    border-color: var(--color-secondary);
+    transform: translateY(-2px);
+}
+.btn-secondary {
+    background-color: transparent;
+    color: var(--color-primary);
+    border:2px solid var(--color-primary);
+}
+.btn-secondary:hover {
+    background-color: var(--color-primary);
+    color: var(--color-light-text);
+}
+
+.main-header {
+    background-color: var(--color-bg);
+    height: 70px;
+    padding: 0 5%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid rgba(0,0,0,0.1);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+.site-logo {
+    height: 250px; /* <-- cambia este valor para agrandar el logo */
+    width: auto;
+}
+
+.main-nav { display:flex; align-items:center; }
+.nav-links { list-style:none; display:flex; gap:25px; }
+.nav-links li { list-style:none; }
+.nav-links a.btn-contact { color: var(--color-light-text); background-color: var(--color-primary); padding:8px 15px; border-radius:5px;}
+.nav-links a.btn-contact:hover { background-color: var(--color-secondary);}
+.nav-toggle { display:none; font-size:1.5rem; background:none; border:none; cursor:pointer; color:var(--color-primary); }
+
+/* HERO */
+.hero {
+    background: url('Logo1.jpg.png') no-repeat center center/cover;
+    height: 80vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    text-align:center;
+    position:relative;
+}
+.hero::after {
+    content:'';
+    position:absolute;
+    top:0; left:0;
+    width:100%; height:100%;
+    background: rgba(245,240,230,0.6);
+}
+.hero-content { position:relative; z-index:1; animation: fadeIn 2s ease-out;}
+@keyframes fadeIn { 0% {opacity:0; transform:translateY(20px);} 100%{opacity:1; transform:translateY(0);} }
+.hero h1 { font-size:3rem; margin-bottom:0.5em; color: var(--color-primary);}
+.hero p { font-size:1.25rem; margin-bottom:2em; color: var(--color-accent);}
+
+/* SECCIONES */
+section { padding:60px 5%; text-align:center; }
+
+.features-section h2 { margin-bottom:40px;}
+.feature-grid {
+    display:flex;
+    flex-wrap:wrap;
+    justify-content:center;
+    gap:30px;
+    max-width:1200px;
+    margin:0 auto;
+}
+.feature-item {
+    flex:1 1 250px;
+    padding:20px;
+    background-color:#fff;
+    border-radius:10px;
+    box-shadow:0 4px 10px rgba(0,0,0,0.05);
+    transition: all 0.3s ease;
+    opacity:0;
+    transform:translateY(30px);
+}
+.feature-item.appear { opacity:1; transform:translateY(0);}
+.feature-item:hover { transform: translateY(-10px); box-shadow:0 10px 20px rgba(0,0,0,0.15);}
+.feature-item .icon { font-size:3rem; color:var(--color-secondary); margin-bottom:15px; display:block;}
+
+/* ==== TOOLTIP CENTRADO ARRIBA ==== */
+.tooltip {
+  position: relative;
+  cursor: pointer;
+}
+
+.tooltip::after {
+  content: attr(data-tooltip);
+  position: absolute;
+  bottom: 125%; /* sube el tooltip encima del botón */
+  left: 50%;
+  transform: translateX(-50%);
+  background: #fff;
+  color: #222;
+  padding: 10px 12px;
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+  font-size: 0.9rem;
+  font-weight: normal; /* sin negrita */
+  line-height: 1.4;
+  width: 230px;
+  text-align: center;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.25s ease, transform 0.25s ease;
+  z-index: 10;
+}
+
+.tooltip::before {
+  content: "";
+  position: absolute;
+  bottom: 115%;
+  left: 50%;
+  transform: translateX(-50%);
+  border-width: 8px;
+  border-style: solid;
+  border-color: #fff transparent transparent transparent;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.25s ease;
+}
+
+.tooltip:hover::after,
+.tooltip:hover::before {
+  opacity: 1;
+  visibility: visible;
+}
+
+
+/* FOOTER */
+.main-footer {
+    background-color: var(--color-primary);
+    color: var(--color-bg);
+    padding:40px 5%;
+    font-size:0.9rem;
+}
+.footer-grid {
+    display:flex;
+    justify-content:space-between;
+    max-width:1200px;
+    margin:0 auto 30px;
+    flex-wrap:wrap;
+    gap:30px;
+}
+.footer-col { min-width:200px;}
+.footer-col h3 { color: var(--color-secondary); margin-bottom:15px;}
+.footer-col a { color: var(--color-bg); display:block; margin-bottom:5px;}
+.footer-col a:hover { color: var(--color-secondary);}
+.social-links a {
+    display:inline-block; width:35px; height:35px; line-height:35px; text-align:center;
+    background-color: var(--color-secondary); color:#fff; border-radius:50%;
+    margin-right:10px; font-weight:700; transition:0.3s;
+}
+.social-links a:hover { background-color: var(--color-accent);}
+.copyright { text-align:center; border-top:1px solid rgba(255,255,255,0.2); padding-top:20px; margin-top:20px;}
+
+/* RESPONSIVE */
+@media(max-width:800px){
+    .nav-links { flex-direction:column; width:100%; position:absolute; top:70px; left:0; background-color: var(--color-bg); border-top:1px solid rgba(0,0,0,0.1); padding:15px 5%; display:none; z-index:999;}
+    .nav-links.open { display:flex;}
+    .nav-links li { text-align:center; margin:5px 0;}
+    .nav-toggle { display:block;}
+    .hero { height:60vh;}
+    .hero h1 { font-size:2rem;}
+    .hero p { font-size:1rem;}
+    .feature-grid { flex-direction:column; }
+    .about-content { flex-direction:column; text-align:center;}
+    .about-image { order:-1; margin-bottom:20px;}
+    .footer-grid { flex-direction:column;}
+    .footer-col { min-width:100%; text-align:center;}
+}
+.cart-icon {
+    display: inline-block;
+    font-size: 1.5rem;
+    color: var(--color-primary);
+    background: none;
+    padding: 5px 10px;
+    border-radius: 5px;
+    transition: transform 0.2s, color 0.2s;
+}
+
+.cart-icon:hover {
+    color: var(--color-secondary);
+    transform: scale(1.1);
+}
+
+</style>
+</head>
+<body>
+
+<header class="main-header">
+    <div class="logo-container">
+        <img src="Logo_2-removebg-preview.png" alt="Logo Ecostyle RD" class="site-logo">
+    </div>
+    <nav class="main-nav">
+        <button class="nav-toggle" aria-label="Toggle navigation">&#9776;</button>
+        <ul class="nav-links" id="nav-menu">
+            <li><a href="#inicio">Inicio</a></li>
+            <li><a href="productos_eco.html">Productos Eco</a></li>
+            <li><a href="#servicios">Nuestros Servicios</a></li>
+            
+           <li>
+    <a href="carrito.html" class="cart-icon" title="Ver carrito">🛒</a></li>
+        </ul>
+    </nav>
+</header>
+
+<section id="inicio" class="hero">
+    <div class="hero-content">
+        <h1>Tu Camino Hacia una Vida Sostenible</h1>
+        <p>Descubre productos y soluciones que respetan el planeta. Es hora de vivir <strong>Ecostyle</strong>.</p>
+        <a href="catalogo.html" class="btn btn-primary">Ver Productos</a>
+    </div>
+</section>
+
+<section id="productos" class="features-section">
+  <h2>Nuestras Soluciones Sostenibles</h2>
+  <div class="feature-grid">
+
+    <div class="feature-item">
+      <span class="icon">&#127793;</span>
+      <h3>Productos Naturales</h3>
+      <p>Artículos libres de químicos y plásticos.</p>
+      <button class="btn btn-primary tooltip" 
+              data-tooltip="Nuestros productos están elaborados con ingredientes totalmente naturales y biodegradables. Evitan el uso de plásticos y químicos dañinos para el medio ambiente, fomentando un consumo responsable.">
+        INFO
+      </button>
+    </div>
+
+    <div class="feature-item">
+      <span class="icon">&#128717;</span>
+      <h3>Accesorios Reutilizables</h3>
+      <p>Alternativas duraderas para el día a día.</p>
+      <button class="btn btn-primary tooltip" 
+              data-tooltip="Encuentra botellas de acero inoxidable, vasos reutilizables, bolsas ecológicas y utensilios hechos con materiales sostenibles. Cada producto está diseñado para reducir los desechos plásticos y fomentar hábitos más responsables.">
+        INFO
+      </button>
+    </div>
+
+    <div class="feature-item">
+      <span class="icon">&#127969;</span>
+      <h3>Hogar Eficiente</h3>
+      <p>Consejos para ahorrar energía y agua.</p>
+      <button class="btn btn-primary tooltip" 
+              data-tooltip="En Ecostyle RD te brindamos ideas para mejorar la eficiencia de tu hogar: desde el uso de bombillas LED y electrodomésticos de bajo consumo, hasta técnicas para reutilizar el agua y aprovechar la energía solar.">
+        INFO
+      </button>
+    </div>
+
+  </div>
+</section>
+
+
+<section id="servicios" class="about-section">
+    <div class="about-content">
+        <div class="about-text">
+            <h2>¿Quiénes Somos en Ecostyle RD?</h2>
+            <p>Somos una iniciativa dominicana dedicada a facilitar la transición hacia un estilo de vida más verde.</p>
+            <p>Nuestro compromiso es ofrecerte alternativas <strong>prácticas, hermosas y éticas</strong>.</p>
+            <a href="mision.html" class="btn btn-secondary">Conoce Más</a>
+        </div>
+        <div class="about-image">
+            <img src="Logo1.jpg.png" alt="Árbol de la Vida Ecostyle">
+        </div>
+    </div>
+</section>
+
+<footer class="main-footer">
+    <div class="footer-grid">
+        <div class="footer-col"><h3>Ecostyle RD</h3><p>Sustainable Living</p></div>
+        
+        <div class="footer-col"><h3>Contáctanos</h3><p>Email: info@ecostylerd.com</p><p>Tel: +1 (809) 555-0000</p>
+            <div class="social-links"><a href="#">FB</a><a href="#">IG</a><a href="#">TW</a></div>
+        </div>
+    </div>
+    <p class="copyright">&copy; 2025 Ecostyle RD. Todos los derechos reservados.</p>
+</footer>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const navToggle = document.querySelector('.nav-toggle');
+    const navMenu = document.getElementById('nav-menu');
+    navToggle.addEventListener('click', () => navMenu.classList.toggle('open'));
+    navMenu.querySelectorAll('a').forEach(link => link.addEventListener('click', () => navMenu.classList.remove('open')));
+
+    const faders = document.querySelectorAll('.feature-item');
+    const appearOptions = { threshold:0.3, rootMargin:"0px 0px -50px 0px" };
+    const appearOnScroll = new IntersectionObserver((entries, observer) => {
+        entries.forEach(entry => {
+            if(!entry.isIntersecting) return;
+            entry.target.classList.add('appear');
+            observer.unobserve(entry.target);
+        });
+    }, appearOptions);
+    faders.forEach(fader => appearOnScroll.observe(fader));
+});
+</script>
+
+</body>
+</html>
